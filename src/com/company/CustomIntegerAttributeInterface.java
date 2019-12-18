@@ -6,4 +6,5 @@ public interface CustomIntegerAttributeInterface {
 	String algorithmID3 = "ID3";
 	String algorithmC45 = "C4.5";
 	String algorithmCART = "CART";
+	String algorithmRegressiveCART = "regressiveCART";
 }

@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.pojo.Entity;
+import com.company.pojo.GridRow;
 import com.company.pojo.digitalAttribute.FifthAttributeInterface;
 import com.company.pojo.digitalAttribute.ThirdAttributeInterface;
 import com.company.services.Helper;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Controller {
+public class RegressiveController {
 
 	private Integer stepCounter = 0;
 	private SplittingService splittingService = new SplittingService();
@@ -19,14 +20,12 @@ public class Controller {
 
 	private CustomIntegerAttributeInterface thirdAttribute = new ThirdAttributeInterface();
 	private CustomIntegerAttributeInterface fifthAttribute = new FifthAttributeInterface();
-	private String algorithm;
 
 	private ArrayList<String> steps = new ArrayList<>();
 
 	private ArrayList<ArrayList<DefaultMutableTreeNode>> hierarchyOfNodes = new ArrayList<>();
 
-	public Controller (ArrayList<Entity> entities, String algorithm, DefaultMutableTreeNode root) {
-		this.algorithm = algorithm;
+	public RegressiveController (ArrayList<Entity> entities, ArrayList<GridRow> rows, DefaultMutableTreeNode root) {
 		recursiveLoop(root, entities);
 	}
 
@@ -44,67 +43,8 @@ public class Controller {
 
 	private void recursiveLoop (DefaultMutableTreeNode father, ArrayList<Entity> entities) {
 
-		if (!helper.isOnlySingleClass(entities)) {
-			DefaultMutableTreeNode newFather;
-			stepCounter++;
+		if (entities.size() != 1) {
 
-			ArrayList<ArrayList<Entity>>[] lists = null;
-			Double[] gainS = null;
-
-			switch (algorithm) {
-				case CustomIntegerAttributeInterface.algorithmID3:
-					lists = splittingService.listsOfEntityInitializer(entities);
-					gainS = helper.listsOfGainSInitializer(entities, lists);
-					break;
-				case CustomIntegerAttributeInterface.algorithmC45:
-					lists = splittingService.listsOfEntityInitializer(entities);
-					gainS = helper.listsOfGainRatioSInitializer(entities, lists);
-					break;
-				case CustomIntegerAttributeInterface.algorithmCART:
-					lists = splittingService.listsOfEntityInitializerBinary(entities);
-					gainS = helper.listsOfCARTGeneralIndicators(entities, lists);
-					break;
-			}
-
-			Integer index;
-			try {
-				index = helper.findMaxInformationGain(gainS);
-			} catch (Exception e) {
-				boolean isAllEquals = true;
-				Entity entityFirst = entities.get(0);
-				for (Entity entity : entities) {
-					if (!entity.equals(entityFirst)) {
-						isAllEquals = false;
-						break;
-					}
-				}
-				if (isAllEquals) {
-					hierarchyOfNodes.add(new ArrayList<>(Arrays.asList(father, new DefaultMutableTreeNode(entities.toString()))));
-					System.out.println("WARNING! ALL ENTITIES ARE EQUALS!");
-					System.out.println(entities.toString());
-					System.out.println("WARNING!");
-					return;
-				} else {
-					Random rand = new Random();
-					if (rand.nextBoolean()) {
-						index = 1;
-					} else index = 4;
-				}
-			}
-			System.out.println("Max - " + (index + 1) + " attribute");
-			System.out.println("________________________________");
-
-			if (algorithm.equals(CustomIntegerAttributeInterface.algorithmCART)) {
-				newFather = this.indexSwitcherBinary(index, father, entities);
-			} else {
-				newFather = this.indexSwitcher(index, father, entities);
-			}
-
-			for (ArrayList<Entity> list : lists[index]) {
-				if (!list.isEmpty()) {
-					recursiveLoop(newFather, list);
-				}
-			}
 		} else {
 			hierarchyOfNodes.add(new ArrayList<>(Arrays.asList(father, new DefaultMutableTreeNode(entities.toString()))));
 		}

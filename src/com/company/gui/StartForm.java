@@ -11,12 +11,13 @@ public class StartForm extends JFrame {
 	private JCheckBox ID3CheckBox;
 	private JCheckBox C45CheckBox;
 	private JCheckBox CARTCheckBox;
+	private JCheckBox regressiveCARTCheckBox;
 	private JPanel startPanel;
 
 	public StartForm ( ) {
 		add(startPanel);
 		setTitle("Добро пожаловать!");
-		setSize(350, 150);
+		setSize(400, 150);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -27,9 +28,10 @@ public class StartForm extends JFrame {
 				Boolean isID3 = ID3CheckBox.isSelected();
 				Boolean isC45 = C45CheckBox.isSelected();
 				Boolean isCART = CARTCheckBox.isSelected();
+				Boolean isRegressiveCART = regressiveCARTCheckBox.isSelected();
 
 				StartLogic startLogic = new StartLogic();
-				startLogic.startBuildTrees(isID3, isC45, isCART);
+				startLogic.startBuildTrees(isID3, isC45, isCART, isRegressiveCART);
 			}
 		});
 	}
