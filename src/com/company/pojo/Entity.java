@@ -86,6 +86,14 @@ public class Entity {
 				'}';
 	}
 
+	public String toStringShort ( ) {
+		return "Entity{" +
+				"number=" + number +
+				", thirdAttribute=" + thirdAttribute +
+				", fifthAttribute=" + fifthAttribute +
+				'}';
+	}
+
 	@Override
 	public boolean equals (Object o) {
 		if (this == o) return true;

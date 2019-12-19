@@ -55,7 +55,11 @@ public class RegressiveController {
 				recursiveLoop(newFather, listOfEntities);
 			}
         } else {
-            hierarchyOfNodes.add(new ArrayList<>(Arrays.asList(father, new DefaultMutableTreeNode(entities.toString()))));
+        	String str="";
+	        for (Entity entity: entities) {
+		        str+=entity.toStringShort();
+	        }
+            hierarchyOfNodes.add(new ArrayList<>(Arrays.asList(father, new DefaultMutableTreeNode(str))));
         }
     }
 

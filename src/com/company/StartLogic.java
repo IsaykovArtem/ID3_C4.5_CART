@@ -2,8 +2,6 @@ package com.company;
 
 import com.company.gui.GuiTree;
 import com.company.pojo.Entity;
-import com.company.pojo.GridError;
-import com.company.pojo.GridRow;
 import com.company.services.EntityInitializer;
 import com.company.services.FillGrid;
 
@@ -13,7 +11,6 @@ import java.util.ArrayList;
 public class StartLogic {
 	private FillGrid fillGrid = new FillGrid();
 	private EntityInitializer entityInitializer = new EntityInitializer();
-
 
 
 	public static void invokeGUI (ArrayList<ArrayList<DefaultMutableTreeNode>> hierarchyOfNodes, String algorithm, DefaultMutableTreeNode root) {
@@ -50,8 +47,9 @@ public class StartLogic {
 		if (isRegressiveCART) {
 			root = new DefaultMutableTreeNode("ROOT");
 			ArrayList<Entity> entitiesRegressive = entityInitializer.initRegressiveEntities(CustomIntegerAttributeInterface.NUMBER_OF_ENTITIES);
-			RegressiveController controller = new RegressiveController(entities, root);
-			invokeGUI(controller.getHierarchyOfNodes(), CustomIntegerAttributeInterface.algorithmRegressiveCART, root );
+			entitiesRegressive.forEach(entity -> System.out.println(entity.toStringShort()));
+			RegressiveController controller = new RegressiveController(entitiesRegressive, root);
+			invokeGUI(controller.getHierarchyOfNodes(), CustomIntegerAttributeInterface.algorithmRegressiveCART, root);
 			steps4 = controller.getStepCounter();
 
 		}
