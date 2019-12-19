@@ -42,9 +42,9 @@ public class EntityInitializer {
 		ArrayList<Entity> entities = new ArrayList<>();
 		Integer thirdStep = 0;
 		Integer fifthStep = 0;
-		for (int i = 1; i < number+1; i++) {
+		for (int i = 1; i < number + 1; i++) {
 			Entity entity = new Entity();
-			entity.setNumber(i-1);
+			entity.setNumber(i - 1);
 			entity.setThirdAttribute(third.getMin() + thirdStep);
 			entity.setFifthAttribute(fifth.getMin() + fifthStep);
 			entities.add(entity);

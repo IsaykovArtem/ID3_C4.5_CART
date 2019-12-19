@@ -7,11 +7,11 @@ public class GridRow {
 	private Integer p2;
 	private Double y;
 
-	public Entity getEntity() {
+	public Entity getEntity ( ) {
 		return entity;
 	}
 
-	public void setEntity(Entity entity) {
+	public void setEntity (Entity entity) {
 		this.entity = entity;
 	}
 
@@ -40,7 +40,7 @@ public class GridRow {
 	}
 
 	@Override
-	public String toString() {
+	public String toString ( ) {
 		return "GridRow{" +
 				"entity=" + entity.toString() +
 				", p1=" + p1 +

@@ -155,11 +155,11 @@ public class Helper {
 		return true;
 	}
 
-	public Integer getSmallerError(ArrayList<GridError> errors){
+	public Integer getSmallerError (ArrayList<GridError> errors) {
 		Double min = 100.0;
 		Integer minI = 0;
 		for (int i = 0; i < errors.size(); i++) {
-			if (errors.get(i).getE()< min){
+			if (errors.get(i).getE() < min) {
 				min = errors.get(i).getE();
 				minI = i;
 			}

@@ -9,9 +9,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
 
 public class StartLogic {
-	private FillGrid fillGrid = new FillGrid();
-	private EntityInitializer entityInitializer = new EntityInitializer();
 
+	private EntityInitializer entityInitializer = new EntityInitializer();
 
 	public static void invokeGUI (ArrayList<ArrayList<DefaultMutableTreeNode>> hierarchyOfNodes, String algorithm, DefaultMutableTreeNode root) {
 		new GuiTree(hierarchyOfNodes, algorithm).invokeGUI(root);
