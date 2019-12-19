@@ -2,12 +2,18 @@ package com.company.pojo;
 
 public class GridRow {
 
+	private Entity entity;
 	private Integer p1;
 	private Integer p2;
 	private Double y;
-	private Double f1;
-	private Double f2;
-	private Double e;
+
+	public Entity getEntity() {
+		return entity;
+	}
+
+	public void setEntity(Entity entity) {
+		this.entity = entity;
+	}
 
 	public Integer getP1 ( ) {
 		return p1;
@@ -33,39 +39,13 @@ public class GridRow {
 		this.y = y;
 	}
 
-	public Double getF1 ( ) {
-		return f1;
-	}
-
-	public void setF1 (Double f1) {
-		this.f1 = f1;
-	}
-
-	public Double getF2 ( ) {
-		return f2;
-	}
-
-	public void setF2 (Double f2) {
-		this.f2 = f2;
-	}
-
-	public Double getE ( ) {
-		return e;
-	}
-
-	public void setE (Double e) {
-		this.e = e;
-	}
-
 	@Override
-	public String toString ( ) {
+	public String toString() {
 		return "GridRow{" +
-				"p1=" + p1 +
+				"entity=" + entity.toString() +
+				", p1=" + p1 +
 				", p2=" + p2 +
 				", y=" + y +
-				", f1=" + f1 +
-				", f2=" + f2 +
-				", e=" + e +
 				'}';
 	}
 }

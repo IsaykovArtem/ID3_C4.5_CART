@@ -2,6 +2,7 @@ package com.company.services;
 
 import com.company.CustomIntegerAttributeInterface;
 import com.company.pojo.Entity;
+import com.company.pojo.GridError;
 import com.company.pojo.digitalAttribute.FifthAttributeInterface;
 import com.company.pojo.digitalAttribute.ThirdAttributeInterface;
 import com.company.pojo.enumAttribute.FirstAttribute;
@@ -250,5 +251,32 @@ public class SplittingService {
 //			list.forEach(entity -> System.out.println(entity.toString()));
 //		}
 		return listOfGroupEntities;
+	}
+
+	public ArrayList<ArrayList<Entity>> regressiveSplitting(ArrayList<Entity> entities, GridError smallerError){
+		ArrayList<ArrayList<Entity>> lists = new ArrayList<>();
+		Integer separator = smallerError.getSeparator();
+
+		lists.add(0, new ArrayList<>());
+		lists.add(1, new ArrayList<>());
+
+		if (smallerError.getAttribute().equals("thirdAttribute")){
+			for (Entity entity : entities) {
+				if (entity.getThirdAttribute() <= separator) {
+					lists.get(0).add(entity);
+				} else {
+					lists.get(1).add(entity);
+				}
+			}
+		} else {
+			for (Entity entity : entities) {
+				if (entity.getFifthAttribute() <= separator) {
+					lists.get(0).add(entity);
+				} else {
+					lists.get(1).add(entity);
+				}
+			}
+		}
+		return lists;
 	}
 }

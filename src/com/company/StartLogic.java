@@ -2,13 +2,19 @@ package com.company;
 
 import com.company.gui.GuiTree;
 import com.company.pojo.Entity;
+import com.company.pojo.GridError;
 import com.company.pojo.GridRow;
 import com.company.services.EntityInitializer;
+import com.company.services.FillGrid;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
 
 public class StartLogic {
+	private FillGrid fillGrid = new FillGrid();
+	private EntityInitializer entityInitializer = new EntityInitializer();
+
+
 
 	public static void invokeGUI (ArrayList<ArrayList<DefaultMutableTreeNode>> hierarchyOfNodes, String algorithm, DefaultMutableTreeNode root) {
 		new GuiTree(hierarchyOfNodes, algorithm).invokeGUI(root);
@@ -16,7 +22,6 @@ public class StartLogic {
 
 	public void startBuildTrees (Boolean isID3, Boolean isC45, Boolean isCART, Boolean isRegressiveCART) {
 
-		EntityInitializer entityInitializer = new EntityInitializer();
 		ArrayList<Entity> entities = entityInitializer.initEntities(CustomIntegerAttributeInterface.NUMBER_OF_ENTITIES);
 //		entities.forEach(entity -> System.out.println(entity.toString()));
 		DefaultMutableTreeNode root;
@@ -45,12 +50,10 @@ public class StartLogic {
 		if (isRegressiveCART) {
 			root = new DefaultMutableTreeNode("ROOT");
 			ArrayList<Entity> entitiesRegressive = entityInitializer.initRegressiveEntities(CustomIntegerAttributeInterface.NUMBER_OF_ENTITIES);
-			entitiesRegressive.forEach(entity -> System.out.println(entity.toString()));
-			ArrayList<GridRow> gridRows = entityInitializer.generateGrid();
-			gridRows.forEach(row -> System.out.println(row.toString()));
-//			Controller controller = new Controller(entities, CustomIntegerAttributeInterface.algorithmCART, root);
-//			invokeGUI(controller.getHierarchyOfNodes(), CustomIntegerAttributeInterface.algorithmCART, root);
-//			steps4 = controller.getStepCounter();
+			RegressiveController controller = new RegressiveController(entities, root);
+			invokeGUI(controller.getHierarchyOfNodes(), CustomIntegerAttributeInterface.algorithmRegressiveCART, root );
+			steps4 = controller.getStepCounter();
+
 		}
 		System.out.println("Шагов ID3 = " + steps1);
 		System.out.println("Шагов C4.5 = " + steps2);

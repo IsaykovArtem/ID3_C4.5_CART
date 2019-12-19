@@ -1,6 +1,7 @@
 package com.company.services;
 
 import com.company.pojo.Entity;
+import com.company.pojo.GridError;
 import com.company.pojo.enumAttribute.FirstAttribute;
 import com.company.pojo.enumAttribute.FourthAttribute;
 import com.company.pojo.enumAttribute.OutputAttribute;
@@ -152,5 +153,17 @@ public class Helper {
 			if (!entity.getOutputAttribute().equals(outputAttribute)) return false;
 		}
 		return true;
+	}
+
+	public Integer getSmallerError(ArrayList<GridError> errors){
+		Double min = 100.0;
+		Integer minI = 0;
+		for (int i = 0; i < errors.size(); i++) {
+			if (errors.get(i).getE()< min){
+				min = errors.get(i).getE();
+				minI = i;
+			}
+		}
+		return minI;
 	}
 }
